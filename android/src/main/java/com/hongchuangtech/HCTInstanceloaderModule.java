@@ -80,6 +80,7 @@ public class HCTInstanceloaderModule extends ReactContextBaseJavaModule {
           }
           URL zipURL = new URL(url);
           HttpURLConnection connection = (HttpURLConnection) zipURL.openConnection();
+          connection.setReadTimeout(5 * 1000);
           ZipInputStream zis = new ZipInputStream(connection.getInputStream());
           ZipEntry zipEntry;
           byte[] buffer = new byte[10240];
@@ -108,11 +109,17 @@ public class HCTInstanceloaderModule extends ReactContextBaseJavaModule {
               Intent intent = new Intent(getCurrentActivity(), HCTReactActivity.class);
               intent.putExtras(args);
               reactContext.getCurrentActivity().startActivity(intent);
-              HCTInstanceloaderModule.this.isLoadingBundle = false;
             }
           });
         } catch (IOException e) {
           e.printStackTrace();
+        } finally {
+          reactContext.runOnUiQueueThread(new Runnable() {
+            @Override
+            public void run() {
+              HCTInstanceloaderModule.this.isLoadingBundle = false;
+            }
+          });
         }
       }
     });
