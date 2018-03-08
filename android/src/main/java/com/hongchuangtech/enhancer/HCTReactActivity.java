@@ -1,10 +1,14 @@
 package com.hongchuangtech.enhancer;
 
-import android.os.Bundle;
 import android.util.Log;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.hongchuangtech.Constance;
+import com.hongchuangtech.HCTInstanceloaderModule;
 
 /**
  * Created by henry on 2018/3/7.
@@ -17,11 +21,6 @@ public class HCTReactActivity extends ReactActivity {
         return new HCTReactActivityDelegate(this);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     private Thread.UncaughtExceptionHandler defaultHandler;
 
     @Override
@@ -31,13 +30,19 @@ public class HCTReactActivity extends ReactActivity {
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             @Override
             public void uncaughtException(Thread thread, Throwable throwable) {
-                Log.e("UNCatched Exception", throwable.getMessage());
+                // print log
+                Log.e("UNCaught Exception", throwable.getMessage());
                 throwable.printStackTrace();
-                HCTReactActivity activity = HCTReactActivity.this;
-                activity.setResult(RESULT_CANCELED);
-                activity.finish();
+                finish();
                 // restore handler
-                Thread.setDefaultUncaughtExceptionHandler(activity.defaultHandler);
+                Thread.setDefaultUncaughtExceptionHandler(defaultHandler);
+                // emit message
+                WritableMap msg = Arguments.createMap();
+                msg.putString("ModuleName", getIntent().getStringExtra(Constance.PARAMS_OUT_MODULE_NAME));
+                HCTInstanceloaderModule
+                        .getMainReactContext()
+                        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                        .emit("RNInstanceFailed", msg);
             }
         });
     }

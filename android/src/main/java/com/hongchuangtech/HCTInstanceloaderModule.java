@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -29,7 +30,16 @@ import java.util.zip.ZipInputStream;
 public class HCTInstanceloaderModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
-  public static ReactContext mainReactContext;
+  private static ReactContext mainReactContext;
+
+  public static void setMainReactContext(ReactContext ctx) {
+    Assertions.assertCondition(mainReactContext == null, "Should Only Set MainReactContext Once!");
+    mainReactContext = ctx;
+  }
+
+  public static ReactContext getMainReactContext() {
+    return mainReactContext;
+  }
 
   public HCTInstanceloaderModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -48,7 +58,6 @@ public class HCTInstanceloaderModule extends ReactContextBaseJavaModule {
     mainReactContext.getJSModule(
       DeviceEventManagerModule.RCTDeviceEventEmitter.class
     ).emit("RNInstanceFinished", wData);
-    getCurrentActivity().setResult(Activity.RESULT_OK);
     getCurrentActivity().finish();
   }
 
