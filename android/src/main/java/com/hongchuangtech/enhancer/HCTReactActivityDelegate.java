@@ -8,6 +8,7 @@ import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.modules.dialog.DialogModule;
 import com.hongchuangtech.Constance;
 
 import java.util.Collections;
@@ -24,12 +25,12 @@ public class HCTReactActivityDelegate extends ReactActivityDelegate {
     private final Activity mContext;
     private String mModuleName;
     private String mBundlePath;
+    private Bundle mLaunchBundle;
     private ReactNativeHost mNativeHost;
 
     public HCTReactActivityDelegate(Activity activity) {
         super(activity, null);
         this.mContext = activity;
-
     }
 
     @Override
@@ -59,8 +60,9 @@ public class HCTReactActivityDelegate extends ReactActivityDelegate {
         };
 
         Bundle data = mContext.getIntent().getExtras();
-        mModuleName = data.getString(Constance.PARAMS_OUT_MODULE_NAME);
-        mBundlePath = data.getString(Constance.PARAMS_OUT_BUNDLE_PATH);
+        mModuleName = data.getString(Constance.PARAMS_MODULE_NAME);
+        mBundlePath = data.getString(Constance.PARAMS_BUNDLE_PATH);
+        mLaunchBundle = data.getBundle(Constance.INIT_PARAMS);
         // not work for js exception
 //        getReactInstanceManager().addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
 //            @Override
@@ -78,7 +80,11 @@ public class HCTReactActivityDelegate extends ReactActivityDelegate {
         loadApp(mModuleName);
     }
 
-
+    @Nullable
+    @Override
+    protected Bundle getLaunchOptions() {
+        return mLaunchBundle;
+    }
 
     @Override
     protected ReactNativeHost getReactNativeHost() {

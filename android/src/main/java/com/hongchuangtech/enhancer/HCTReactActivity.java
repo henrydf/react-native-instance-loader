@@ -1,5 +1,6 @@
 package com.hongchuangtech.enhancer;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.facebook.react.ReactActivity;
@@ -33,16 +34,10 @@ public class HCTReactActivity extends ReactActivity {
                 // print log
                 Log.e("UNCaught Exception", throwable.getMessage());
                 throwable.printStackTrace();
+                setResult(Constance.ALT_RN_ACTIVITY_RESULT_FAILED, getIntent());
                 finish();
                 // restore handler
                 Thread.setDefaultUncaughtExceptionHandler(defaultHandler);
-                // emit message
-                WritableMap msg = Arguments.createMap();
-                msg.putString("ModuleName", getIntent().getStringExtra(Constance.PARAMS_OUT_MODULE_NAME));
-                HCTInstanceloaderModule
-                        .getMainReactContext()
-                        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                        .emit("RNInstanceFailed", msg);
             }
         });
     }

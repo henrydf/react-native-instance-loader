@@ -32,7 +32,9 @@ class NavigationHelperComp extends React.Component {
   }
 
   onFailed = (msg) => {
-    Alert.alert('异常退出', `${msg.ModuleName}发生了异常...`);
+    // setTimeout(() => {
+      Alert.alert('异常退出', `${msg['PARAMS_MODULE_NAME']}发生了异常...`);
+    // }, 0);
   }
 
   render() {
