@@ -16,14 +16,20 @@ void presentViewController(NSURL* url, NSString* moduleName, NSDictionary* initi
 
 @implementation HCTInstanceloader
 
-- (dispatch_queue_t)methodQueue
+//- (dispatch_queue_t)methodQueue
+//{
+//    return dispatch_get_main_queue();
+//}
+RCT_EXPORT_MODULE();
+
+RCT_EXPORT_METHOD(print)
 {
-    return dispatch_get_main_queue();
+    NSLog(@"Method is OK!!!!");
 }
-RCT_EXPORT_MODULE(HCTInstanceloader);
 
 RCT_EXPORT_METHOD(startNewInstance:(id)rnInfo)
 {
+    NSLog(@"Wohahahahahhahaha@@!@#!@#!@#!@#!@");
     if (self.isLoadingBundle) {
         return;
     }
