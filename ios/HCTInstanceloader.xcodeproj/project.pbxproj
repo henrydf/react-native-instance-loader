@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B3E7B58A1CC2AC0600A0062D /* HCTInstanceloader.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* HCTInstanceloader.m */; };
 		BA307EAB20527DA000C99FD9 /* HCTRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA307EAA20527DA000C99FD9 /* HCTRNViewController.m */; };
+		BA402CD22056793E00A808DD /* HCTInstanceloader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA402CD02056793D00A808DD /* HCTInstanceloader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +25,10 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libHCTInstanceloader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHCTInstanceloader.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3E7B5881CC2AC0600A0062D /* HCTInstanceloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCTInstanceloader.h; sourceTree = "<group>"; };
-		B3E7B5891CC2AC0600A0062D /* HCTInstanceloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCTInstanceloader.m; sourceTree = "<group>"; };
 		BA307EA920527DA000C99FD9 /* HCTRNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCTRNViewController.h; sourceTree = "<group>"; };
 		BA307EAA20527DA000C99FD9 /* HCTRNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCTRNViewController.m; sourceTree = "<group>"; };
+		BA402CD02056793D00A808DD /* HCTInstanceloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCTInstanceloader.m; sourceTree = "<group>"; };
+		BA402CD12056793E00A808DD /* HCTInstanceloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCTInstanceloader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +53,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				B3E7B5881CC2AC0600A0062D /* HCTInstanceloader.h */,
-				B3E7B5891CC2AC0600A0062D /* HCTInstanceloader.m */,
+				BA402CD12056793E00A808DD /* HCTInstanceloader.h */,
+				BA402CD02056793D00A808DD /* HCTInstanceloader.m */,
 				BA307EA920527DA000C99FD9 /* HCTRNViewController.h */,
 				BA307EAA20527DA000C99FD9 /* HCTRNViewController.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -117,8 +117,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA402CD22056793E00A808DD /* HCTInstanceloader.m in Sources */,
 				BA307EAB20527DA000C99FD9 /* HCTRNViewController.m in Sources */,
-				B3E7B58A1CC2AC0600A0062D /* HCTInstanceloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +211,6 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 				);
@@ -227,7 +226,6 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
 				);

@@ -41,15 +41,22 @@ RCT_EXPORT_METHOD(startNewInstance:(id)rnInfo)
     NSString* namespace = rnInfo[@"namespace"] ?: moduleName;
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString* cacheDir = rnInfo[@"cacheDir"] ?: paths.firstObject;
+    NSString* zipPath = [NSString stringWithFormat:@"%@/tmp.zip", cacheDir];
     NSString* destDir = [NSString stringWithFormat:@"%@/%@", cacheDir, namespace];
-    NSString* bundleFile = [NSString stringWithFormat:@"%@/main.jsbundle", destDir];
+    [[NSFileManager defaultManager] createDirectoryAtPath:destDir
+                              withIntermediateDirectories:YES
+                                               attributes:nil
+                                                    error:nil];
+    NSString* bundleFile = [NSString stringWithFormat:@"file://%@/main.jsbundle", destDir];
     
     NSDictionary* initProps = rnInfo[@"initProps"];
+    NSError* error;
 
     NSURLSession* session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [[session downloadTaskWithURL:url
                 completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                    [SSZipArchive unzipFileAtPath:location.absoluteString
+                    [[NSFileManager defaultManager] moveItemAtPath:location.path toPath:zipPath error:&error];
+                    [SSZipArchive unzipFileAtPath:zipPath
                                     toDestination:destDir
                                         overwrite:YES
                                          password:nil
@@ -58,9 +65,12 @@ RCT_EXPORT_METHOD(startNewInstance:(id)rnInfo)
                                   }
                                 completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
                                     self.isLoadingBundle = NO;
-                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                        presentViewController([NSURL URLWithString:bundleFile], moduleName, initProps);
-                                    });
+                                    if (succeeded) {
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            presentViewController([NSURL URLWithString:bundleFile], moduleName, initProps);
+                                        });
+                                    }
+                                    [[NSFileManager defaultManager] removeItemAtPath:zipPath error:&error];
                                 }];
                 }] resume];
 }

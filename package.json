@@ -1,7 +1,6 @@
-
 {
   "name": "react-native-instanceloader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,6 +15,7 @@
     "react": "^16.0.0"
   },
   "peerDependencies": {
-    "react-native": "^0.41.2"
-  }
+    "react": "*"
+  },
+  "devDependencies": {}
 }
