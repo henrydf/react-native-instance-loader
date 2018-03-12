@@ -5,7 +5,11 @@
 #import <React/RCTBridgeModule.h>
 #endif
 
+#import <UIKit/UIKit.h>
+
 @interface HCTInstanceloader : NSObject <RCTBridgeModule>
+
+@property (atomic, assign) BOOL isLoadingBundle;
 
 @end
   

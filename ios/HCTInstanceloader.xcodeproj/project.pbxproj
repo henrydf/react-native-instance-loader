@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B3E7B58A1CC2AC0600A0062D /* HCTInstanceloader.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* HCTInstanceloader.m */; };
+		BA307EAB20527DA000C99FD9 /* HCTRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA307EAA20527DA000C99FD9 /* HCTRNViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +27,8 @@
 		134814201AA4EA6300B7C361 /* libHCTInstanceloader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHCTInstanceloader.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E7B5881CC2AC0600A0062D /* HCTInstanceloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCTInstanceloader.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* HCTInstanceloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCTInstanceloader.m; sourceTree = "<group>"; };
+		BA307EA920527DA000C99FD9 /* HCTRNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCTRNViewController.h; sourceTree = "<group>"; };
+		BA307EAA20527DA000C99FD9 /* HCTRNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HCTRNViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +55,8 @@
 			children = (
 				B3E7B5881CC2AC0600A0062D /* HCTInstanceloader.h */,
 				B3E7B5891CC2AC0600A0062D /* HCTInstanceloader.m */,
+				BA307EA920527DA000C99FD9 /* HCTRNViewController.h */,
+				BA307EAA20527DA000C99FD9 /* HCTRNViewController.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +117,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA307EAB20527DA000C99FD9 /* HCTRNViewController.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* HCTInstanceloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,7 +210,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
-				"$(inherited)",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
