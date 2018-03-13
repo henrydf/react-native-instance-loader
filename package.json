@@ -1,6 +1,6 @@
 {
   "name": "react-native-instanceloader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Run multiple RN instances",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,10 @@
     "multiple",
     "instanceloader"
   ],
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/henrydf/react-native-instance-loader"
+	},
   "author": "",
   "license": "MIT",
   "dependencies": {

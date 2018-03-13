@@ -170,3 +170,9 @@ NativeModules.returnMainProcess({
 import { NativeModules } from 'react-native';
 NativeModules.DeviceEventEmitter.addListener('RNInstanceFinished', data => console.log('receive data from sub rn app!!!', data));
 ```
+6. Catch Exception from Sub RN App (Android)
+```javascript
+DeviceEventEmitter.addListener('RNInstanceFailed', (msg) => {
+	Alert.alert('异常退出', `${msg['PARAMS_MODULE_NAME']}发生了异常...`);
+});
+```
