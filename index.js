@@ -26,15 +26,15 @@ class NavigationHelperComp extends React.Component {
         routeName,
         params,
         action,
-      },
+      } = {},
     } = navParams;
-    this.props.navigation.navigate(routeName, params, action);
+    if (routeName) {
+      this.props.navigation.navigate(routeName, params, action);
+    }
   }
 
   onFailed = (msg) => {
-    // setTimeout(() => {
       Alert.alert('异常退出', `${msg['PARAMS_MODULE_NAME']}发生了异常...`);
-    // }, 0);
   }
 
   render() {

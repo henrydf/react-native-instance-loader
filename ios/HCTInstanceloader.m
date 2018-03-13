@@ -2,8 +2,15 @@
 #import "HCTInstanceloader.h"
 #import "HCTRNViewController.h"
 #import <SSZipArchive/SSZipArchive.h>
+#import <React/RCTBridge.h>
+#import <React/RCTRootView.h>
+
+static id __previousBridge = nil;
 
 void presentViewController(NSURL* url, NSString* moduleName, NSDictionary* initialProps) {
+    if ([RCTBridge respondsToSelector:@selector(currentBridge)]) {
+        __previousBridge = [RCTBridge performSelector:@selector(currentBridge)];
+    }
     UIViewController* rootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
     HCTRNViewController* rnVC = [[HCTRNViewController alloc] initWithBundleURL:url
                                                                     moduleName:moduleName
@@ -13,23 +20,40 @@ void presentViewController(NSURL* url, NSString* moduleName, NSDictionary* initi
     }];
 }
 
-
 @implementation HCTInstanceloader
 
-//- (dispatch_queue_t)methodQueue
-//{
-//    return dispatch_get_main_queue();
-//}
+@synthesize bridge = _bridge;
+
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(print)
+RCT_EXPORT_METHOD(returnMainProcess:(id)data)
 {
-    NSLog(@"Method is OK!!!!");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController* rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        UIView* rootView = rootViewController.view;
+        RCTBridge* bridge = nil;
+        if ([rootView isKindOfClass:[RCTRootView class]]) {
+            bridge = ((RCTRootView*)rootView).bridge;
+        } else {
+            id appDelegate = [UIApplication sharedApplication].delegate;
+            if ([appDelegate respondsToSelector:@selector(bridgeOfMainRNApp)]) {
+                bridge = [appDelegate bridgeOfMainRNApp];
+            }
+        }
+        NSAssert(bridge, @"Can not get RCTBridge from main RN, give up...");
+        [rootViewController dismissViewControllerAnimated:YES completion:^{
+            [bridge enqueueJSCall:@"RCTDeviceEventEmitter.emit" args:@[@"RNInstanceFinished", data]];
+            if ([RCTBridge respondsToSelector:@selector(setCurrentBridge:)]) {
+                [RCTBridge performSelector:@selector(setCurrentBridge:) withObject:__previousBridge];
+            }
+//            [bridge invalidate];
+//            [bridge reload];
+        }];
+    });
 }
 
 RCT_EXPORT_METHOD(startNewInstance:(id)rnInfo)
 {
-    NSLog(@"Wohahahahahhahaha@@!@#!@#!@#!@#!@");
     if (self.isLoadingBundle) {
         return;
     }

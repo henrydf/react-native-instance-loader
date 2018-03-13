@@ -7,6 +7,7 @@
 //
 
 #import "HCTRNViewController.h"
+#import "HCTNoDevSettings.h"
 #import <React/RCTRootView.h>
 
 @interface HCTRNViewController () {
@@ -33,10 +34,8 @@
 //}
 
 - (void)loadView{
-    self.view = [[RCTRootView alloc] initWithBundleURL:_url
-                                            moduleName:_moduleName
-                                     initialProperties:_initialProps
-                                         launchOptions:nil];
+    RCTBridge* bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
+    self.view = [[RCTRootView alloc] initWithBridge:bridge moduleName:_moduleName initialProperties:_initialProps];
 }
 
 - (void)viewDidLoad {
@@ -47,6 +46,22 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge {
+    return _url;
+}
+
+- (BOOL)shouldBridgeInitializeNativeModulesSynchronously:(RCTBridge *)bridge {
+    return YES;
+}
+
+- (BOOL)shouldBridgeLoadJavaScriptSynchronously:(RCTBridge *)bridge {
+    return YES;
+}
+
+- (NSArray<id<RCTBridgeModule>> *)extraModulesForBridge:(RCTBridge *)bridge {
+    return @[[HCTNoDevSettings new]];
 }
 
 @end

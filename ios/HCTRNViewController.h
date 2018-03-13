@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <React/RCTBridgeDelegate.h>
 
-@interface HCTRNViewController : UIViewController
+@interface HCTRNViewController : UIViewController<RCTBridgeDelegate>
 
 - (instancetype)initWithBundleURL:(NSURL*)url moduleName:(NSString*)moduleName initialProps:(NSDictionary*)props;
 
