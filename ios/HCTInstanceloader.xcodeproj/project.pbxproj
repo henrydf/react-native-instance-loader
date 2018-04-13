@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA28200E2080681100BE0FB6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BA28200D2080681100BE0FB6 /* libz.tbd */; };
 		BA307EAB20527DA000C99FD9 /* HCTRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA307EAA20527DA000C99FD9 /* HCTRNViewController.m */; };
 		BA402CD22056793E00A808DD /* HCTInstanceloader.m in Sources */ = {isa = PBXBuildFile; fileRef = BA402CD02056793D00A808DD /* HCTInstanceloader.m */; };
 /* End PBXBuildFile section */
@@ -40,7 +39,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA28200E2080681100BE0FB6 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,13 +223,12 @@
 		58B511F01A9E6C8500147676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../React/**",
-					"$(SRCROOT)/../../react-native/React/**",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+				);
 				PRODUCT_NAME = HCTInstanceloader;
 				SKIP_INSTALL = YES;
 			};
@@ -240,13 +237,12 @@
 		58B511F11A9E6C8500147676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../../../React/**",
-					"$(SRCROOT)/../../react-native/React/**",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+				);
 				PRODUCT_NAME = HCTInstanceloader;
 				SKIP_INSTALL = YES;
 			};
