@@ -183,3 +183,11 @@ DeviceEventEmitter.addListener('RNInstanceFailed', (msg) => {
   `pod init`  now will create a wrong `Podfile`. To make it works, just delete the duplicate item.
 
 * Make Sure Youre Projects(RN Projects) are bundled with the same RN version.
+
+* Could not determine java version from '10'. (Can not run `react-native run-android`)
+
+  Update your Gradle(@4.6) and Android Studio Gradle Plugin(@3.1.1). More info https://developer.android.com/studio/build/gradle-plugin-3-0-0-migration.html#update_gradle
+
+* /bin/sh: adb: command not found
+
+  Set up your PATH variable for adb. On macOS, you can run `export PATH=$PATH:~/Library/Android/sdk/platform-tools/` in Terminal.

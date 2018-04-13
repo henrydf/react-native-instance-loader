@@ -65,7 +65,7 @@ public class HCTInstanceloaderModule extends ReactContextBaseJavaModule {
   public void startNewInstance(final ReadableMap rnInfo) {
     if (isLoadingBundle) return;
     isLoadingBundle = true;
-    reactContext.runUIBackgroundRunnable(new Runnable() {
+    reactContext.runOnNativeModulesQueueThread(new Runnable() {
       @Override
       public void run() {
         String name = rnInfo.getString("moduleName");
