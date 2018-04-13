@@ -11,18 +11,8 @@ or
 
 `$ react-native link react-native-instanceloader`
 
-#### iOS - Cocoapods
-1. Add `# Add new pods below this line` to your Podfile at right place, see more at <http://facebook.github.io/react-native/docs/linking-libraries-ios.html#step-2>.
-2. install this library as a pod.
-```shell
-$ cd ios # which directory include your Podfile
-$ pod install
-```
-3. Not sure below is required!
-4. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-5. Go to `node_modules` ➜ `react-native-instanceloader` and add `HCTInstanceloader.xcodeproj`
-#### iOS - w/o Cocoapods
-not tested...
+#### iOS
+No more instructions.
 
 #### Android
 1. Add a new activity description in `AndroidManifest.xml`
@@ -43,7 +33,7 @@ not tested...
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
 2. Go to `node_modules` ➜ `react-native-instanceloader` and add `HCTInstanceloader.xcodeproj`
 3. In XCode, in the project navigator, select your project. Add `libHCTInstanceloader.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
+4. Run your project (`Cmd+R`)
 
 #### Android
 
@@ -51,12 +41,13 @@ not tested...
   - Add `import com.hongchuangtech.HCTInstanceloaderPackage;` to the imports at the top of the file
   - Add `new HCTInstanceloaderPackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
-  	```
-  	include ':react-native-instanceloader'
-  	project(':react-native-instanceloader').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-instanceloader/android')
+   ```
+   	include ':react-native-instanceloader'
+   	project(':react-native-instanceloader').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-instanceloader/android')
+   ```
   ```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
+  ```
       compile project(':react-native-instanceloader')
   ```
 
@@ -65,7 +56,7 @@ not tested...
 
 ### Load Sub RN App
 1. Main RN App
-```javascript
+​```javascript
 import { NativeModules } from 'react-native';
 NativeModules.HCTInstanceloader.startNewInstance({
 	androidUrl: 'http://10.0.2.2:8080/water-site/water-site.android.zip', // bundle files w/o any unnecessary directories
@@ -73,7 +64,7 @@ NativeModules.HCTInstanceloader.startNewInstance({
 	moduleName: 'WaterSite', // root component name which registed in AppRegistry.registerComponent
 	namespace: 'WaterSite', // store local bundle files under this, will use moduleName when not set this value
 });
-```
+  ```
 2. Sub RN App
 ```javascript
 import { NativeModules } from 'react-native';
@@ -190,3 +181,5 @@ DeviceEventEmitter.addListener('RNInstanceFailed', (msg) => {
 * [!] The target `rntest-tvOSTests` is declared twice.
 
   `pod init`  now will create a wrong `Podfile`. To make it works, just delete the duplicate item.
+
+* Make Sure Youre Projects(RN Projects) are bundled with the same RN version.
