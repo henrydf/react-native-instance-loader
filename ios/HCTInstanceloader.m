@@ -1,7 +1,7 @@
 
 #import "HCTInstanceloader.h"
 #import "HCTRNViewController.h"
-#import <SSZipArchive/SSZipArchive.h>
+#import "SSZipArchive/SSZipArchive.h"
 #import <React/RCTBridge.h>
 #import <React/RCTRootView.h>
 

@@ -54,11 +54,11 @@ not tested...
   	```
   	include ':react-native-instanceloader'
   	project(':react-native-instanceloader').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-instanceloader/android')
-  	```
+  ```
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
       compile project(':react-native-instanceloader')
-  	```
+  ```
 
 
 ## Usage
@@ -176,3 +176,17 @@ DeviceEventEmitter.addListener('RNInstanceFailed', (msg) => {
 	Alert.alert('异常退出', `${msg['PARAMS_MODULE_NAME']}发生了异常...`);
 });
 ```
+
+## Trouble Shooting
+
+* xcrun: error: unable to find utility "instruments", not a developer tool or in PATH
+
+  Make sure your `Command Line Tool for Xcode` is out of date.
+
+  And check your Xcode setting.
+
+  https://stackoverflow.com/questions/39778607/error-running-react-native-app-from-terminal-ios
+
+* [!] The target `rntest-tvOSTests` is declared twice.
+
+  `pod init`  now will create a wrong `Podfile`. To make it works, just delete the duplicate item.
